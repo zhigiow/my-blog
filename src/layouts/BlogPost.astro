@@ -36,6 +36,20 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
+
+			/* 🖥️ 2. 当屏幕宽度大于 1024px 时（代表进入电脑桌面端） */
+			@media (min-width: 1024px) {
+				.prose {
+				width: 960px;               /* 你可以让电脑端的全站文章最大显示到 960px（或者你喜欢的 1000px） */
+				max-width: 100%;
+				}
+				
+				/* 顺便可以让大头图在电脑端也变大 */
+				.hero-image {
+				max-width: 960px;
+				margin: 0 auto;
+				}
+			}
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;
