@@ -1,0 +1,74 @@
+---
+// src/layouts/FoodLayout.astro
+import BaseHead from '../components/BaseHead.astro';
+
+const { title, description, pubDate, heroImage } = Astro.props;
+---
+
+<html lang="zh">
+    <head>
+    <BaseHead title={title} description={description} />
+    
+   <style is:global>
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+        width: 100%;
+    }
+
+    footer {
+        flex-shrink: 0;
+        padding: 20px 0 !important;
+        width: 100%;
+    }
+
+    /* 1. 进一步放大主容器，并清除一切内外边距 */
+    .prose {
+        max-width: 95% !important; 
+        width: 2000px !important;  /* 把上限提到 1600px，让中间更大 */
+        margin: 0 auto !important;
+        padding-left: 0 !important;  
+        padding-right: 0 !important; 
+    }
+
+    /* 2. 💡 核心放大命令：强制让地图组件里的所有 div 和 SVG 铺满 */
+    .prose > div,
+    .prose svg {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+    </style>
+    </head>
+  <body>  
+        <!-- 如果你有 Header 可以放在这里 -->
+        <main>
+            <article>
+                <div class="title">
+                    <div class="date">{pubDate}</div>
+                    <h1>{title}</h1>
+                </div>
+                
+                {/* 修改前：<div style="text-align: center; margin: 10px 0;"> */}
+                {/* 修改后：加上了 welcome-section 类名，并用 <h2> 标签把字体放大 */}
+                <div class="welcome-section" style="text-align: center; margin: 25px 0;">
+                    <h2 style="font-size: 2rem; font-weight: bold; color: #333; margin: 0;">
+                        欢迎来到我的大马美食地图！
+                    </h2>
+                </div>
+                
+                <slot />
+            </article>
+        </main>
+        
+        <!-- 💡 关键：确保把 Footer 组件加在这里！ -->
+        <!-- 如果你已经有了 <Footer />, 请把它放在这里，并把上面的全局样式带上 -->
+    </body>
+</html>

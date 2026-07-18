@@ -21,13 +21,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				margin: 0;
 			}
 			.hero-image {
-				width: 100%;
+				width: 20%;
+				margin: 0 auto;
 			}
 			.hero-image img {
 				display: block;
-				margin: 0 auto;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
+				* 💡 核心修改步骤：限制最高高度 */
+				max-height: 50px; /* 你可以根据需要把 300px 改大或改小 */
+				width: 100%;       /* 保持宽度填满容器 */
+				object-fit: cover; /* 关键！这会裁剪图片以适应高度，防止图片被压扁 */
 			}
 			.prose {
 				width: 720px;
